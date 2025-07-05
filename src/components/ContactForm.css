@@ -1,0 +1,127 @@
+/* ---------- SECTION ---------- */
+.talk-to-us-section {
+  background: #f9b60d;
+  background: linear-gradient(180deg, #f9b60d 0%, #f7b000 100%);
+  padding: 60px 20px 80px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ---------- HEADING ---------- */
+.section-title {
+  font-size: 48px;
+  font-weight: 800;
+  color: #3d3d3d;
+  margin-bottom: 40px;
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ---------- FORM ---------- */
+.hubspot-form {
+  width: 100%;
+  max-width: 300px; /* Matches the screenshot layout */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 16px;
+  color: #3d3d3d;
+  margin-bottom: 6px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.required {
+  color: #ff4d4f;
+}
+
+.form-group input {
+  height: 50px;
+  padding: 0 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #cfe7f5; /* Light-blue background from reference */
+}
+
+/* ---------- CHECKBOX ---------- */
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 35px;
+}
+
+.form-check input {
+  width: 18px;
+  height: 18px;
+  accent-color: #3d6cb9;
+}
+
+.checkbox-label {
+  font-size: 14px;
+  color: #3d3d3d;
+}
+
+/* ---------- BUTTON ---------- */
+.submit-btn {
+  background-color: #2a4d93;
+  color: #fff;
+  font-weight: 700;
+  font-size: 18px;
+  height: 48px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* ---------- FOOTER CREDIT ---------- */
+.hubspot-note {
+  margin-top: 35px;
+  font-size: 15px;
+  color: #555;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  max-width: 300px;
+}
+
+.hubspot-note img {
+  width: 22px;
+  height: 22px;
+}
+
+.hubspot-note a {
+  color: #ff694b;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.hubspot-note a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 640px) {
+  .section-title {
+    font-size: 36px;
+  }
+}

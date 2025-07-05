@@ -1,0 +1,229 @@
+.dnaSuccessContainer {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* To handle card overflow if any */
+}
+
+.headerContent {
+  max-width: 800px;
+  margin-bottom: 50px;
+}
+
+.mainHeading {
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.description {
+  font-size: 1.1em;
+  color: #666;
+  line-height: 1.6;
+}
+
+.cardsWrapper {
+  width: 100%;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.cardsContainer {
+  display: flex;
+  position: relative;
+  max-width: 1200px;
+  padding: 20px 0;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  /* Removed width transition here */
+  transition: background-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out, z-index 0.1s ease-in-out; /* Only animate background/shadow/z-index */
+  flex-shrink: 0;
+  height: 300px;
+
+  /* Increased Default width for non-active cards */
+  width: 250px; /* Adjusted from 180px */
+
+  /* Overlapping effect: negative margin-left for subsequent cards */
+  margin-left: -60px; /* Adjusted for wider cards, experiment with this value */
+}
+
+/* Override margin-left for the first card to ensure it's at the beginning */
+.card:first-child {
+    margin-left: 0;
+}
+
+
+/* Z-index for default cards based on their order (later cards on top) */
+.card:nth-child(1) { z-index: 5; }
+.card:nth-child(2) { z-index: 4; }
+.card:nth-child(3) { z-index: 3; }
+.card:nth-child(4) { z-index: 2; }
+.card:nth-child(5) { z-index: 1; }
+
+
+.cardActive {
+padding-left: 50px;
+  background-color: #ffc107; /* Yellow background */
+  width: 450px; /* Adjusted active width to match new base width, experiment with this value */
+  box-shadow: 0 8px 30px rgba(255, 193, 7, 0.4);
+  z-index: 15; /* Ensure active card is always on top of others, even default */
+  /* No width transition defined here, it will just snap */
+}
+
+.cardContent {
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.cardActive .cardContent {
+  color: #fff;
+}
+
+.cardNumber {
+  font-size: 8em;
+  font-weight: bold;
+  color: #e0e0e0;
+  transition: opacity 0.1s ease-in-out; /* Smooth fade for number */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.cardActive .cardNumber {
+  display: none; /* Hide the number on the active card */
+}
+
+.cardTitle {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  opacity: 0; /* Hidden by default */
+  transform: translateY(20px);
+  transition: all 0.3s ease-in-out; /* Keep animation for text */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #4a4a4a;
+}
+
+.cardActive .cardTitle {
+  opacity: 1; /* Visible when active */
+  transform: translateY(0);
+  white-space: normal;
+}
+
+.cardDescription {
+  font-size: 1.1em;
+  line-height: 1.5;
+  opacity: 0; /* Hidden by default */
+  transform: translateY(20px);
+  transition: all 0.3s ease-in-out 0.1s; /* Keep animation for text */
+  color: #4a4a4a;
+}
+
+.cardActive .cardDescription {
+  opacity: 1; /* Visible when active */
+  transform: translateY(0);
+}
+
+.learnMoreContainer {
+  margin-top: 20px;
+}
+
+.learnMoreButton {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 25px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 30px;
+  text-decoration: none;
+  color: #ffc107;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.learnMoreButton:hover {
+  background-color: #ffc107;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+}
+
+.arrow {
+  margin-left: 8px;
+  font-size: 1.2em;
+  transition: transform 0.3s ease;
+}
+
+.learnMoreButton:hover .arrow {
+  transform: translateX(5px);
+}
+
+/* Responsive adjustments for overlapping cards */
+@media (max-width: 1024px) {
+    .cardsContainer {
+        flex-wrap: wrap; /* Cards will wrap on smaller screens */
+        justify-content: center; /* Center them when wrapped */
+        padding: 20px;
+    }
+
+    .card {
+        width: calc(50% - 10px); /* Two cards per row, account for gap */
+        margin-left: 0; /* Remove overlap on smaller screens for cleaner layout */
+        margin-bottom: 20px; /* Add vertical spacing */
+        height: 250px;
+    }
+
+    .card:first-child {
+        margin-left: 0;
+    }
+
+    .cardActive {
+        width: calc(100% - 20px); /* Active card takes full width */
+    }
+}
+
+@media (max-width: 768px) {
+    .mainHeading {
+        font-size: 2em;
+    }
+
+    .description {
+        font-size: 1em;
+    }
+
+    .card {
+        width: calc(100% - 20px); /* One card per row */
+        height: 220px;
+    }
+}

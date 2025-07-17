@@ -1,169 +1,353 @@
-// import React from 'react';
+
+
+
+// "use client"; // Keep this if you are using Next.js App Router. Otherwise, you can remove it.
+
+// import React, { useRef } from "react"; // Only useRef is needed now
+
+// // --- ScrollVelocity Component Definition ---
+// // Make sure you have 'framer-motion' installed: npm install framer-motion
+// // And a utility for `cn` (class name concatenation), e.g., 'clsx' or 'tailwind-merge'.
+// // If you don't have `cn`, you can replace it with a simple template literal for basic cases.
+
+// import {
+//   motion,
+//   useScroll,
+//   useSpring,
+//   useTransform,
+//   useMotionValue,
+//   useVelocity,
+//   useAnimationFrame,
+//   wrap,
+// } from "framer-motion";
+
+// // Simple `cn` utility if you don't have one set up.
+// // For production, consider using a library like `clsx` or `tailwind-merge`.
+// const cn = (...classes: string[]) => classes.filter(Boolean).join(' ');
+
+// interface ScrollVelocityProps extends React.HTMLAttributes<HTMLDivElement> {
+//   children: React.ReactNode[] | string;
+//   velocity: number;
+//   movable?: boolean;
+//   clamp?: boolean;
+// }
+
+// const ScrollVelocity = React.forwardRef<HTMLDivElement, ScrollVelocityProps>(
+//   ({ children, velocity = 5, movable = true, clamp = false, className, ...props }, ref) => {
+//     const baseX = useMotionValue(0);
+//     const { scrollY } = useScroll();
+//     const scrollVelocity = useVelocity(scrollY);
+//     const smoothVelocity = useSpring(scrollVelocity, {
+//       damping: 50,
+//       stiffness: 100,
+//     });
+//     const velocityFactor = useTransform(smoothVelocity, [0, 10000], [0, 5], {
+//       clamp,
+//     });
+
+//     const x = useTransform(baseX, (v) => `${wrap(0, -50, v)}%`);
+
+//     const directionFactor = useRef<number>(1);
+//     const scrollThreshold = useRef<number>(5);
+
+//     useAnimationFrame((t, delta) => {
+//       if (movable) {
+//         move(delta);
+//       } else {
+//         if (Math.abs(scrollVelocity.get()) >= scrollThreshold.current) {
+//           move(delta);
+//         }
+//       }
+//     });
+
+//     function move(delta: number) {
+//       let moveBy = directionFactor.current * velocity * (delta / 1000);
+//       if (velocityFactor.get() < 0) {
+//         directionFactor.current = -1;
+//       } else if (velocityFactor.get() > 0) {
+//         directionFactor.current = 1;
+//       }
+//       moveBy += directionFactor.current * moveBy * velocityFactor.get();
+//       baseX.set(baseX.get() + moveBy);
+//     }
+
+//     return (
+//       <div
+//         ref={ref}
+//         className={cn("relative m-0 flex flex-nowrap overflow-hidden whitespace-nowrap leading-[0.8] tracking-[-2px]", className)}
+//         {...props}
+//       >
+//         <motion.div
+//           className="flex flex-row flex-nowrap whitespace-nowrap text-xl font-semibold uppercase *:mr-6 *:block md:text-2xl xl:text-4xl"
+//           style={{ x }}
+//         >
+//           {typeof children === "string" ? (
+//             <>
+//               {Array.from({ length: 5 }).map((_, idx) => (
+//                 <span key={idx}>{children}</span>
+//               ))}
+//             </>
+//           ) : (
+//             children
+//           )}
+//         </motion.div>
+//       </div>
+//     );
+//   },
+// );
+// ScrollVelocity.displayName = "ScrollVelocity";
+// // --- End ScrollVelocity Component Definition ---
 
 // export default function TheoryOfChange() {
+//   // activePhaseId state and its usage are removed as the large details section is gone.
+
 //   const phases = [
 //     {
-//       title: "DISCOVER",
-//       description: "Assessment & Analysis",
-//       color: "bg-red-500",
-//       textColor: "text-white"
+//       id: 0,
+//       title: "LEARNING",
+//       description: "To get familiar with key concepts and frameworks",
+//       color: "bg-[#FDB813]", // Yellow
+//       contentImage: "/images/learn.png", // Ensure this path is correct relative to your public/assets folder
 //     },
 //     {
-//       title: "DESIGN",
-//       description: "Custom Solutions",
-//       color: "bg-green-500",
-//       textColor: "text-white"
+//       id: 1,
+//       title: "APPLICATION",
+//       description: "To apply concepts in real-world scenarios",
+//       color: "bg-[#33A46A]", // Green
+//       contentImage: "/images/application.png", // Ensure this path is correct
 //     },
 //     {
-//       title: "DELIVER",
-//       description: "Expert Training",
-//       color: "bg-blue-500",
-//       textColor: "text-white"
+//       id: 2,
+//       title: "EXPERIENCE",
+//       description: "To deeply engage through memorable tools and immersions",
+//       color: "bg-[#009EE0]", // Blue
+//       contentImage: "/images/experience.png", // Ensure this path is correct
 //     },
 //     {
-//       title: "DEPLOY",
-//       description: "Implementation",
-//       color: "bg-pink-500",
-//       textColor: "text-white"
+//       id: 3,
+//       title: "COACHING",
+//       description: "To receive personalized guidance and feedback",
+//       color: "bg-[#EE2A7B]", // Pink
+//       contentImage: "/images/coaching.png", // Ensure this path is correct
 //     },
 //     {
-//       title: "DEVELOP",
-//       description: "Continuous Growth",
-//       color: "bg-gray-700",
-//       textColor: "text-white"
-//     }
+//       id: 4,
+//       title: "REINFORCEMENT",
+//       description: "To solidify learning and drive sustained behavioral change",
+//       color: "bg-[#4D4D4D]", // Dark Gray
+//       contentImage: "/images/reinforcement.png", // Ensure this path is correct
+//     },
+//     {
+//       id: 5,
+//       title: "NUDGING",
+//       description: "To deploy behavior science techniques for high consumption",
+//       color: "bg-[#F77E3C]", // Orange
+//       contentImage: "/images/nudging.png", // Ensure this path is correct
+//     },
 //   ];
+
+//   const scrollVelocities = [3, -3]; // Define velocities for the ScrollVelocity component
 
 //   return (
 //     <section className="py-20 bg-white">
 //       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+//         {/* Section Header */}
 //         <div className="text-center mb-16">
-//           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+//           <h2 className="text-[40px] font-bold text-[#4a4a4a] mb-4">
 //             Our Theory Of Change
 //           </h2>
-//           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-//             Our proven 5-phase methodology ensures sustainable transformation and measurable business impact.
+//           <p className="text-[16px] text-[#4a4a4a] max-w-3xl mx-auto">
+//             Creative pedagogical approach with benchmark consumption, unmatched learner love and genuine real-world
+//             impact for today's constantly-shifting workplaces
 //           </p>
 //         </div>
 
-//         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-//           <div className="flex flex-col md:flex-row">
-//             {phases.map((phase, index) => (
-//               <div key={index} className={`${phase.color} ${phase.textColor} p-6 flex-1 text-center`}>
-//                 <div className="transform -rotate-90 md:rotate-0">
-//                   <h3 className="text-lg font-bold mb-2">{phase.title}</h3>
-//                   <p className="text-sm opacity-90">{phase.description}</p>
-//                 </div>
-//               </div>
+//         {/* Dynamic Phases (ScrollVelocity Integration) */}
+//         <div className="w-full"> {/* Removed mb-16 as no section below */}
+//           <div className="flex flex-col space-y-5 py-10">
+//             {scrollVelocities.map((v, index) => (
+//               <ScrollVelocity key={index} velocity={v}>
+//                 {phases.map((phase) => (
+//                   <div
+//                     key={phase.id}
+//                     className={cn(
+//                       "relative h-[8rem] w-[14rem] md:h-[10rem] md:w-[18rem] xl:h-[14rem] xl:w-[22rem]", // Increased size to better fit content
+//                       "flex flex-col items-center justify-center p-3 text-white text-center rounded-lg shadow-md overflow-hidden", // Added overflow-hidden
+//                       phase.color
+//                     )}
+//                     // Removed onMouseEnter/onMouseLeave as there's no active state to manage here
+//                   >
+//                     {/* Image at the top of the card */}
+//                   {/* Removed img tag and replaced with background image style */}
+//                   <div
+//                     className="absolute inset-0 bg-center bg-no-repeat bg-contain opacity-30 pointer-events-none"
+//                     style={{ backgroundImage: `url(${phase.contentImage ?? ''})` }}
+//                   />
+//                     <h3 className="font-bold text-lg md:text-xl xl:text-2xl leading-tight mb-1"> {/* Adjusted leading-tight */}
+//                         {phase.title}
+//                     </h3>
+//                     <p className="text-sm opacity-90 leading-snug"> {/* Adjusted leading-snug */}
+//                         {phase.description}
+//                     </p>
+//                   </div>
+//                 ))}
+//               </ScrollVelocity>
 //             ))}
 //           </div>
-
-//           <div className="relative">
-//             <div className="bg-[#FDB813] text-white p-8 rounded-lg">
-//               <div className="mb-6">
-//                 <div className="text-4xl font-bold mb-2">JUDGING</div>
-//                 <p className="text-lg opacity-90">
-//                   We evaluate current capabilities and identify growth opportunities to create targeted development plans.
-//                 </p>
-//               </div>
-//               <div className="space-y-4">
-//                 <div className="flex items-center space-x-2">
-//                   <div className="w-3 h-3 bg-white rounded-full"></div>
-//                   <span>Skills Assessment</span>
-                  
-//                 </div>
-//                 <div className="flex items-center space-x-2">
-//                   <div className="w-3 h-3 bg-white rounded-full"></div>
-//                   <span>Gap Analysis</span>
-//                 </div>
-//                 <div className="flex items-center space-x-2">
-//                   <div className="w-3 h-3 bg-white rounded-full"></div>
-//                   <span>Custom Roadmap</span>
-//                 </div>
-//               </div>
-//             </div>
-//             <div className="absolute -top-4 -right-4 w-20 h-20 bg-yellow-300 rounded-full opacity-20"></div>
-//             <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-yellow-400 rounded-full opacity-20"></div>
-//           </div>
 //         </div>
+
+//         {/* The large details section has been entirely removed from here */}
+
 //       </div>
 //     </section>
 //   );
 // }
 
 
+"use client"; // Keep this if you are using Next.js App Router. Otherwise, you can remove it.
 
+import React, { useRef } from "react";
 
+// --- ScrollVelocity Component Definition ---
+// Make sure you have 'framer-motion' installed: npm install framer-motion
+// And a utility for `cn` (class name concatenation), e.g., 'clsx' or 'tailwind-merge'.
+// If you don't have `cn`, you can replace it with a simple template literal for basic cases.
 
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+  useMotionValue,
+  useVelocity,
+  useAnimationFrame,
+  wrap,
+} from "framer-motion";
 
+// Simple `cn` utility if you don't have one set up.
+// For production, consider using a library like `clsx` or `tailwind-merge`.
+const cn = (...classes: string[]) => classes.filter(Boolean).join(' ');
 
+interface ScrollVelocityProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode[] | string;
+  velocity: number;
+  movable?: boolean;
+  clamp?: boolean;
+}
 
-import React, { useState } from 'react';
-import { ArrowUp, ArrowRight } from 'lucide-react'; // Import ArrowUp and ArrowRight icons
+const ScrollVelocity = React.forwardRef<HTMLDivElement, ScrollVelocityProps>(
+  ({ children, velocity = 5, movable = true, clamp = false, className, ...props }, ref) => {
+    const baseX = useMotionValue(0);
+    const { scrollY } = useScroll();
+    const scrollVelocity = useVelocity(scrollY);
+    const smoothVelocity = useSpring(scrollVelocity, {
+      damping: 50,
+      stiffness: 100,
+    });
+    const velocityFactor = useTransform(smoothVelocity, [0, 10000], [0, 5], {
+      clamp,
+    });
+
+    const x = useTransform(baseX, (v) => `${wrap(0, -50, v)}%`);
+
+    const directionFactor = useRef<number>(1);
+    const scrollThreshold = useRef<number>(5);
+
+    useAnimationFrame((t, delta) => {
+      if (movable) {
+        move(delta);
+      } else {
+        if (Math.abs(scrollVelocity.get()) >= scrollThreshold.current) {
+          move(delta);
+        }
+      }
+    });
+
+    function move(delta: number) {
+      let moveBy = directionFactor.current * velocity * (delta / 1000);
+      if (velocityFactor.get() < 0) {
+        directionFactor.current = -1;
+      } else if (velocityFactor.get() > 0) {
+        directionFactor.current = 1;
+      }
+      moveBy += directionFactor.current * moveBy * velocityFactor.get();
+      baseX.set(baseX.get() + moveBy);
+    }
+
+    return (
+      <div
+        ref={ref}
+        className={cn("relative m-0 flex flex-nowrap overflow-hidden whitespace-nowrap leading-[0.8] tracking-[-2px]", className)}
+        {...props}
+      >
+        <motion.div
+          className="flex flex-row flex-nowrap whitespace-nowrap text-xl font-semibold uppercase *:mr-6 *:block md:text-2xl xl:text-4xl"
+          style={{ x }}
+        >
+          {typeof children === "string" ? (
+            <>
+              {Array.from({ length: 5 }).map((_, idx) => (
+                <span key={idx}>{children}</span>
+              ))}
+            </>
+          ) : (
+            children
+          )}
+        </motion.div>
+      </div>
+    );
+  },
+);
+ScrollVelocity.displayName = "ScrollVelocity";
+// --- End ScrollVelocity Component Definition ---
 
 export default function TheoryOfChange() {
-  // State to manage the currently active (hovered/expanded) phase
-  const [activePhase, setActivePhase] = useState(0); // Default to the first phase
-
   const phases = [
     {
       id: 0,
       title: "LEARNING",
       description: "To get familiar with key concepts and frameworks",
       color: "bg-[#FDB813]", // Yellow
-      // color: "bg-[#F77E3C]", // Orange
-      icon: "learn.png", // Replace with actual path or use an SVG/component
-      // For demonstration, using placeholder image URLs. You'd use actual local paths.
-      contentImage: "learn.png", // Example from image
-      arrowRotation: "", // No specific rotation for the text inside (it's horizontal in expanded state)
+      contentImage: "/learn.png", // REMINDER: Make sure these paths are correct in your public folder!
     },
     {
       id: 1,
       title: "APPLICATION",
       description: "To apply concepts in real-world scenarios",
-      color: "bg-[#33A46A]", // Green
-      icon: "/path/to/application-icon.png",
-      contentImage: "application.png", // Placeholder
-      arrowRotation: "",
+      color: "bg-[#33A46A]", // Green (Matches your 'Application' image)
+      contentImage: "/application.png",
     },
     {
       id: 2,
       title: "EXPERIENCE",
       description: "To deeply engage through memorable tools and immersions",
-      color: "bg-[#009EE0]", // Blue
-      icon: "experience.png",
-      contentImage: "experience.png", // Placeholder
-      arrowRotation: "",
+      color: "bg-[#009EE0]", // Blue (Matches your 'Experience' image)
+      contentImage: "/experience.png",
     },
     {
       id: 3,
       title: "COACHING",
       description: "To receive personalized guidance and feedback",
-      color: "bg-[#EE2A7B]", // Pink
-      icon: "/path/to/coaching-icon.png",
-      contentImage: "coaching.png", // Placeholder
-      arrowRotation: "",
+      color: "bg-[#EE2A7B]", // Pink (Matches your 'Coaching' image)
+      contentImage: "/coaching.png",
     },
     {
       id: 4,
       title: "REINFORCEMENT",
       description: "To solidify learning and drive sustained behavioral change",
-      color: "bg-[#4D4D4D]", // Dark Gray
-      icon: "/path/to/reinforcement-icon.png",
-      contentImage: "reinforcement.png", // Placeholder
-      arrowRotation: "",
+      color: "bg-[#4D4D4D]", // Dark Gray (Matches your 'Reinforcement' image)
+      contentImage: "/reinforcement.png",
     },
     {
       id: 5,
       title: "NUDGING",
       description: "To deploy behavior science techniques for high consumption",
-      // color: "bg-[#FDB813]", // Yellow
-      color: "bg-[#F77E3C]", // Orange
-      icon: "/path/to/nudging-icon.png",
-      contentImage: "nudging.png", // Placeholder
-      arrowRotation: "",
+      color: "bg-[#F77E3C]", // Orange (If you have an image for nudging)
+      contentImage: "/nudging.png",
     },
   ];
+
+  const scrollVelocities = [3, -3];
 
   return (
     <section className="py-20 bg-white">
@@ -179,72 +363,45 @@ export default function TheoryOfChange() {
           </p>
         </div>
 
-        {/* Dynamic Phases Container */}
-        <div className="flex justify-center items-stretch h-[500px] rounded-2xl overflow-hidden shadow-xl">
-          {phases.map((phase, index) => (
-            <div
-              key={phase.id}
-              className={`
-                relative
-                ${phase.color}
-                text-white
-                flex flex-col items-center justify-center
-                cursor-pointer
-                transition-all duration-500 ease-in-out transform
-                ${activePhase === phase.id ? 'flex-grow-[3] w-[60%] z-20' : 'flex-grow-[1] w-[10%] z-10'}
-                ${activePhase !== null && activePhase !== phase.id ? 'opacity-80' : ''}
-              `}
-              onMouseEnter={() => setActivePhase(phase.id)}
-              onMouseLeave={() => setActivePhase(0)} // Reset to default (LEARNING) when mouse leaves any strip
-            >
-              {/* Vertical Text for collapsed state */}
-              <div
-                className={`
-                  absolute
-                  transform -rotate-90 origin-center
-                  whitespace-nowrap
-                  font-extrabold text-2xl
-                  transition-opacity duration-300
-                  ${activePhase === phase.id ? 'opacity-0 -translate-y-full' : 'opacity-100 translate-y-0'}
-                `}
-              >
-                {phase.title}
-              </div>
+        {/* Dynamic Phases (ScrollVelocity Integration) */}
+        <div className="w-full">
+          <div className="flex flex-col space-y-5 py-10">
+            {scrollVelocities.map((v, index) => (
+              <ScrollVelocity key={index} velocity={v}>
+                {phases.map((phase) => (
+                  <div
+                    key={phase.id}
+                    className={cn(
+                      "relative", // Needed for absolute positioning of background image
+                      "h-[8rem] w-[14rem] md:h-[10rem] md:w-[18rem] xl:h-[14rem] xl:w-[22rem]",
+                      "flex flex-col items-center justify-center p-3 text-white text-center rounded-lg shadow-md overflow-hidden",
+                      phase.color,
+                      "group" // For potential hover effects
+                    )}
+                  >
+                    {/* Background Image Overlay */}
+                    {phase.contentImage && (
+                      <div
+                        className="absolute inset-0 bg-center bg-no-repeat bg-contain opacity-30 pointer-events-none transition-opacity duration-300 group-hover:opacity-50"
+                        style={{ backgroundImage: `url(${phase.contentImage})` }}
+                      />
+                    )}
 
-              {/* Arrow for collapsed state */}
-              <div
-                className={`
-                  absolute top-4 right-4
-                  transition-opacity duration-300
-                  ${activePhase === phase.id ? 'opacity-0' : 'opacity-100'}
-                `}
-              >
-                <ArrowRight className="w-6 h-6" />
-              </div>
-
-              {/* Content for expanded state */}
-              <div
-                className={`
-                  absolute
-                  p-8
-                  text-center
-                  flex flex-col items-center justify-center
-                  transition-all duration-500 ease-in-out
-                  ${activePhase === phase.id ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'}
-                  ${activePhase === phase.id ? '' : 'pointer-events-none'} // Disable interaction when not active
-                `}
-              >
-                {phase.contentImage && (
-                  <img src={phase.contentImage} alt={phase.title} className="mb-4 h-48 object-contain" />
-                )}
-                <h3 className="font-extrabold text-5xl mb-2 flex items-center">
-                  {phase.title}
-                  <ArrowUp className="ml-2 w-8 h-8 transform rotate-0" /> {/* Arrow pointing up */}
-                </h3>
-                <p style={{ color: '#4a4a4a' }} className="text-xl max-w-sm">{phase.description}</p>
-              </div>
-            </div>
-          ))}
+                    {/* Content (Title and Description) */}
+                    <div className="relative z-10 flex flex-col items-center justify-center h-full"> {/* z-10 to ensure text is above image */}
+                        <h3 className="font-bold text-xl md:text-2xl xl:text-3xl leading-snug">
+                            {phase.title}
+                        </h3>
+                        {/* <p className="text-sm md:text-base opacity-90 leading-normal max-w-xs mx-auto">
+                            {phase.description}
+                        </p> */}
+                        {/* <p className="text-xs md:text-sm">{phase.description}</p> */}
+                    </div>
+                  </div>
+                ))}
+              </ScrollVelocity>
+            ))}
+          </div>
         </div>
       </div>
     </section>

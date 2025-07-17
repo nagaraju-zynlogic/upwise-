@@ -82,9 +82,9 @@
 
 .cardActive {
 padding-left: 50px;
-  background-color: #ffc107; /* Yellow background */
+  background-color: #0f0b53; /* Dark blue background */
   width: 450px; /* Adjusted active width to match new base width, experiment with this value */
-  box-shadow: 0 8px 30px rgba(255, 193, 7, 0.4);
+  box-shadow: 0 8px rgba(0, 0, 139, 0.579)ba(255, 193, 7, 0.4);
   z-index: 15; /* Ensure active card is always on top of others, even default */
   /* No width transition defined here, it will just snap */
 }
@@ -103,7 +103,7 @@ padding-left: 50px;
 }
 
 .cardActive .cardContent {
-  color: #fff;
+  color: #ffffff;
 }
 
 .cardNumber {

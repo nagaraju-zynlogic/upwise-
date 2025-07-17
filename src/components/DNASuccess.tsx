@@ -155,8 +155,8 @@ const DNASuccess: React.FC = () => {
               <div className={styles.cardContent}>
                 {activeCardId === card.id ? (
                   <>
-                    <h2 className={styles.cardTitle}>{card.title}</h2>
-                    <p className={styles.cardDescription}>{card.description}</p>
+                    <h2 className={styles.cardTitle} style={{ color: 'white' }}>{card.title}</h2>
+                    <p className={styles.cardDescription} style={{ color: 'white' }}>{card.description}</p>
                   </>
                 ) : (
                   <span className={styles.cardNumber}>{card.id}</span>

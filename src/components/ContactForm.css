@@ -1,8 +1,7 @@
 /* ---------- SECTION ---------- */
 .talk-to-us-section {
-  background: #f9b60d;
-  background: linear-gradient(180deg, #f9b60d 0%, #f7b000 100%);
-  padding: 60px 20px 80px;
+  background: linear-gradient(to bottom, white 0%, white 15%, #0f0b53 15%, #0f0b53 100%);
+  padding: 140px 20px 80px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -14,7 +13,7 @@
 .section-title {
   font-size: 48px;
   font-weight: 800;
-  color: #3d3d3d;
+  color: #ffffff;
   margin-bottom: 40px;
   font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -38,7 +37,7 @@
 .form-group label {
   font-weight: 600;
   font-size: 16px;
-  color: #3d3d3d;
+  color: #ffffff;
   margin-bottom: 6px;
   font-family: 'Poppins', sans-serif;
 }
@@ -53,7 +52,7 @@
   font-size: 16px;
   border: none;
   border-radius: 4px;
-  background-color: #cfe7f5; /* Light-blue background from reference */
+  background-color: #ffffff; /* Light-blue background from reference */
 }
 
 /* ---------- CHECKBOX ---------- */
@@ -67,12 +66,12 @@
 .form-check input {
   width: 18px;
   height: 18px;
-  accent-color: #3d6cb9;
+  accent-color: #ffffff;
 }
 
 .checkbox-label {
   font-size: 14px;
-  color: #3d3d3d;
+  color: #ffffff;
 }
 
 /* ---------- BUTTON ---------- */
@@ -97,7 +96,7 @@
 .hubspot-note {
   margin-top: 35px;
   font-size: 15px;
-  color: #555;
+  color: #c0504c;
   display: flex;
   align-items: flex-start;
   gap: 6px;
@@ -110,7 +109,7 @@
 }
 
 .hubspot-note a {
-  color: #ff694b;
+  color: #c0504c;
   font-weight: 600;
   text-decoration: none;
 }
@@ -125,3 +124,4 @@
     font-size: 36px;
   }
 }
+
